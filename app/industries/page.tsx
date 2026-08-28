@@ -3,6 +3,7 @@ import Link from "next/link";
 const industries = [
   {
     number: "01",
+    slug: "healthcare",
     title: "Healthcare & Pharmaceuticals",
     description:
       "Digital platforms, data solutions and technology systems that can support healthcare providers, pharmaceutical organizations and health-related businesses.",
@@ -16,6 +17,7 @@ const industries = [
   },
   {
     number: "02",
+    slug: "financial-services",
     title: "Financial Services",
     description:
       "Technology solutions that support financial operations, customer experiences, reporting, automation and data-driven decision making.",
@@ -29,6 +31,7 @@ const industries = [
   },
   {
     number: "03",
+    slug: "education",
     title: "Education & E-Learning",
     description:
       "Digital learning environments and technology solutions for training providers, educational institutions and organizations.",
@@ -42,6 +45,7 @@ const industries = [
   },
   {
     number: "04",
+    slug: "public-sector",
     title: "Government & Public Sector",
     description:
       "Technology platforms that can help public-sector organizations digitize services, improve processes and make better use of information.",
@@ -55,6 +59,7 @@ const industries = [
   },
   {
     number: "05",
+    slug: "manufacturing",
     title: "Manufacturing",
     description:
       "Technology solutions designed to improve operational visibility, process efficiency, data management and decision making.",
@@ -68,6 +73,7 @@ const industries = [
   },
   {
     number: "06",
+    slug: "logistics",
     title: "Logistics & Transportation",
     description:
       "Data-driven technology for organizations managing vehicles, assets, logistics operations and distributed teams.",
@@ -81,6 +87,7 @@ const industries = [
   },
   {
     number: "07",
+    slug: "professional-services",
     title: "Professional Services",
     description:
       "Digital systems and automation that help professional organizations manage customers, operations, information and performance.",
@@ -94,6 +101,7 @@ const industries = [
   },
   {
     number: "08",
+    slug: "smes",
     title: "SMEs & Growing Businesses",
     description:
       "Practical technology solutions that help growing organizations establish strong digital foundations without unnecessary complexity.",
@@ -107,7 +115,22 @@ const industries = [
   },
 ];
 
-export default function IndustriesPage() {
+interface IndustriesPageProps {
+  searchParams: Promise<{
+    sector?: string;
+  }>;
+}
+
+export default async function IndustriesPage({
+  searchParams,
+}: IndustriesPageProps) {
+  const params = await searchParams;
+  const selectedSector = params.sector;
+
+  const selectedIndustry = industries.find(
+    (industry) => industry.slug === selectedSector,
+  );
+
   return (
     <main>
       {/* Hero */}
@@ -148,6 +171,49 @@ export default function IndustriesPage() {
         </div>
       </section>
 
+      {/* Selected industry */}
+      {selectedIndustry && (
+        <section className="bg-blue-50 py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-3xl border border-blue-200 bg-white p-7 shadow-sm sm:p-9">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">
+                    Selected Industry
+                  </p>
+
+                  <h2 className="mt-2 text-2xl font-bold text-slate-950 sm:text-3xl">
+                    {selectedIndustry.title}
+                  </h2>
+                </div>
+
+                <Link
+                  href="/industries"
+                  className="text-sm font-bold text-blue-700 hover:text-blue-900"
+                >
+                  View all industries →
+                </Link>
+              </div>
+
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
+                {selectedIndustry.description}
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {selectedIndustry.solutions.map((solution) => (
+                  <span
+                    key={solution}
+                    className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700"
+                  >
+                    {solution}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Industries */}
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -168,46 +234,54 @@ export default function IndustriesPage() {
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {industries.map((industry) => (
-              <article
-                key={industry.number}
-                className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-extrabold text-blue-600">
-                    {industry.number}
-                  </span>
+            {industries.map((industry) => {
+              const isSelected = industry.slug === selectedSector;
 
-                  <span className="h-1 w-9 rounded-full bg-green-500 transition-all group-hover:w-14" />
-                </div>
+              return (
+                <article
+                  key={industry.number}
+                  className={`group flex h-full flex-col rounded-2xl border p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                    isSelected
+                      ? "border-blue-500 bg-blue-50 ring-2 ring-blue-500/20"
+                      : "border-slate-200 bg-white hover:border-blue-200"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-extrabold text-blue-600">
+                      {industry.number}
+                    </span>
 
-                <h3 className="mt-6 text-lg font-bold text-slate-950">
-                  {industry.title}
-                </h3>
+                    <span className="h-1 w-9 rounded-full bg-green-500 transition-all group-hover:w-14" />
+                  </div>
 
-                <p className="mt-3 text-sm leading-6 text-slate-600">
-                  {industry.description}
-                </p>
+                  <h3 className="mt-6 text-lg font-bold text-slate-950">
+                    {industry.title}
+                  </h3>
 
-                <div className="mt-auto pt-6">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Relevant capabilities
+                  <p className="mt-3 text-sm leading-6 text-slate-600">
+                    {industry.description}
                   </p>
 
-                  <ul className="space-y-2">
-                    {industry.solutions.map((solution) => (
-                      <li
-                        key={solution}
-                        className="flex items-start gap-2 text-xs font-medium text-slate-600"
-                      >
-                        <span className="text-green-600">✓</span>
-                        <span>{solution}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
+                  <div className="mt-auto pt-6">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-400">
+                      Relevant capabilities
+                    </p>
+
+                    <ul className="space-y-2">
+                      {industry.solutions.map((solution) => (
+                        <li
+                          key={solution}
+                          className="flex items-start gap-2 text-xs font-medium text-slate-600"
+                        >
+                          <span className="text-green-600">✓</span>
+                          <span>{solution}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -274,7 +348,7 @@ export default function IndustriesPage() {
       <section className="bg-green-600 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Don't see your industry?
+            Don&apos;t see your industry?
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-green-50">
@@ -293,3 +367,4 @@ export default function IndustriesPage() {
     </main>
   );
 }
+

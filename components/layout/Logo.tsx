@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 interface LogoProps {
@@ -11,22 +12,24 @@ export default function Logo({ compact = false }: LogoProps) {
       aria-label="MICT Technology Solutions - Home"
       className="group inline-flex items-center gap-3"
     >
-      <span
-        className="flex h-10 w-10 items-center justify-center rounded-lg
-                   bg-red-600 text-lg font-extrabold text-white
-                   shadow-sm transition-transform duration-200
-                   group-hover:scale-105"
-      >
-        M
-      </span>
+      <Image
+        src="/images/branding/mict-technology-solutions-logo.png"
+        alt="MICT Technology Solutions"
+        width={compact ? 48 : 64}
+        height={compact ? 48 : 64}
+        priority
+        className={`object-contain transition-transform duration-200 group-hover:scale-[1.02] ${
+          compact ? "h-10 w-10" : "h-14 w-14"
+        }`}
+      />
 
       {!compact && (
         <span className="flex flex-col leading-none">
-          <span className="text-base font-extrabold tracking-tight text-slate-900">
+          <span className="text-lg font-extrabold tracking-tight text-slate-900">
             MICT
           </span>
 
-          <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-700">
+          <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700">
             Technology Solutions
           </span>
         </span>

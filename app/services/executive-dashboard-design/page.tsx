@@ -306,7 +306,7 @@ export default function ExecutiveDashboardDesignPage() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
-            Tell us about your data, KPIs and reporting requirements and let's
+            Tell us about your data, KPIs and reporting requirements and let&apos;s
             explore how MICT can turn your information into useful business
             intelligence.
           </p>

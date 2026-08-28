@@ -249,7 +249,7 @@ export default function ITConsultingPage() {
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
             Tell us about your technology challenges, systems or business
-            objectives and let's explore the right approach.
+            objectives and let&apos;s explore the right approach.
           </p>
 
           <Link

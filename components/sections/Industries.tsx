@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 const industries = [
@@ -5,42 +6,42 @@ const industries = [
     title: "Healthcare & Pharmaceuticals",
     description:
       "Digital platforms, healthcare workflows, analytics, customer portals and operational systems.",
-    href: "/industries/healthcare-pharmaceuticals",
+    href: "/industries?sector=healthcare",
     tag: "Healthcare",
   },
   {
     title: "Financial Services",
     description:
       "Business applications, data solutions, automation, dashboards and technology infrastructure.",
-    href: "/industries/financial-services",
+    href: "/industries?sector=financial-services",
     tag: "Finance",
   },
   {
     title: "Education & Training",
     description:
       "Learning platforms, e-learning systems, digital classrooms and technology skills development.",
-    href: "/industries/education",
+    href: "/industries?sector=education",
     tag: "Education",
   },
   {
     title: "Government & Public Sector",
     description:
       "Digital services, portals, information systems, workflow automation and data-driven reporting.",
-    href: "/industries/public-sector",
+    href: "/industries?sector=public-sector",
     tag: "Public Sector",
   },
   {
     title: "Professional Services",
     description:
       "Technology platforms, business automation, analytics and digital tools for professional organizations.",
-    href: "/industries/professional-services",
+    href: "/industries?sector=professional-services",
     tag: "Professional Services",
   },
   {
     title: "SMEs & Growing Businesses",
     description:
       "Practical technology solutions that help growing businesses improve efficiency, visibility and digital presence.",
-    href: "/industries/smes",
+    href: "/industries?sector=smes",
     tag: "SME",
   },
 ];
@@ -107,3 +108,4 @@ export default function Industries() {
     </section>
   );
 }
+

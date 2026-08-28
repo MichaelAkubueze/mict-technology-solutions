@@ -277,12 +277,12 @@ export default function DataSciencePage() {
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
             We can customize data science and analytics training around your
-            organization's datasets, technology stack, business processes and
+            organization&apos;s datasets, technology stack, business processes and
             workforce capability requirements.
           </p>
 
           <Link
-            href="/training/corporate"
+            href="/training"
             className="mt-7 inline-flex rounded-full bg-blue-700 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-blue-800"
           >
             Explore Corporate Training
@@ -298,7 +298,7 @@ export default function DataSciencePage() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-green-50">
-            Tell us about your learning goals and let's identify the right
+            Tell us about your learning goals and let&apos;s identify the right
             training path for you or your organization.
           </p>
 

@@ -247,7 +247,7 @@ export default function MobileAppDevelopmentPage() {
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-green-50">
             Tell us about your users, business requirements or digital service
-            and let's explore the right mobile solution.
+            and let&apos;s explore the right mobile solution.
           </p>
 
           <Link

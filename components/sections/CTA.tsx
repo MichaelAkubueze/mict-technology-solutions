@@ -8,13 +8,13 @@ export default function CTA() {
 
       <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-100">
-          Let's Build Something That Matters
+          Let&apos;s Build Something That Matters
         </p>
 
         <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
           Have a technology challenge?
           <br />
-          Let's turn it into a solution.
+          Let&apos;s turn it into a solution.
         </h2>
 
         <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-blue-100 sm:text-lg">

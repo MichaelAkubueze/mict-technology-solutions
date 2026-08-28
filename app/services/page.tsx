@@ -286,7 +286,7 @@ export default function ServicesPage() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
-            Tell us what you are trying to achieve and let's explore the right
+            Tell us what you are trying to achieve and let&apos;s explore the right
             technology approach for your organization.
           </p>
 

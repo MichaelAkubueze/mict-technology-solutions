@@ -305,7 +305,7 @@ export default function DataEngineeringPage() {
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-green-50">
             Tell us about your data sources, reporting challenges or analytics
-            objectives and let's discuss the right approach.
+            objectives and let&apos;s discuss the right approach.
           </p>
 
           <Link

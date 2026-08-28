@@ -303,7 +303,7 @@ export default function NetworkEngineeringPage() {
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
             Tell us about your connectivity requirements, existing
-            infrastructure or network challenges and let's discuss the right
+            infrastructure or network challenges and let&apos;s discuss the right
             solution.
           </p>
 

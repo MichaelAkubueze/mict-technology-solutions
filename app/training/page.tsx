@@ -257,7 +257,7 @@ export default function TrainingPage() {
 
                 <p className="mt-4 max-w-2xl text-base leading-7 text-blue-100">
                   We can develop customized corporate training programs around
-                  your organization's systems, processes, technology stack and
+                  your organization&apos;s systems, processes, technology stack and
                   business objectives.
                 </p>
               </div>

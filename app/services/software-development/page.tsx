@@ -248,7 +248,7 @@ export default function SoftwareDevelopmentPage() {
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
             Tell us about the business challenge, workflow or application you
-            need and let's explore the right technology approach.
+            need and let&apos;s explore the right technology approach.
           </p>
 
           <Link

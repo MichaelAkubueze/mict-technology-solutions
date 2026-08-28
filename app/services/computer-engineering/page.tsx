@@ -123,7 +123,7 @@ export default function ComputerEngineeringPage() {
 
               <p>
                 Our approach focuses on selecting and maintaining technology
-                that is appropriate for the organization's users, workload,
+                that is appropriate for the organization&apos;s users, workload,
                 software environment and operational objectives.
               </p>
             </div>
@@ -305,8 +305,8 @@ export default function ComputerEngineeringPage() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
-            Tell us about your organization's computer systems, hardware
-            requirements or technical challenges and let's discuss the right
+            Tell us about your organization&apos;s computer systems, hardware
+            requirements or technical challenges and let&apos;s discuss the right
             solution.
           </p>
 

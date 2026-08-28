@@ -75,7 +75,7 @@ export default function PortalDevelopmentPage() {
               <p>
                 Whether the requirement is a customer self-service portal,
                 employee platform, partner portal or specialized business
-                application, we design solutions around the organization's
+                application, we design solutions around the organization&apos;s
                 operational requirements.
               </p>
 

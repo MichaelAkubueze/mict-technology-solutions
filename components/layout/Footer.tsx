@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const services = [
@@ -12,7 +13,18 @@ const services = [
     label: "Business & IT Automation",
     href: "/services/business-it-automation",
   },
-  { label: "Mobile App Development", href: "/services/mobile-app-development" },
+  {
+    label: "Computer Engineering",
+    href: "/services/computer-engineering",
+  },
+  {
+    label: "Network Engineering",
+    href: "/services/network-engineering",
+  },
+  {
+    label: "Mobile App Development",
+    href: "/services/mobile-app-development",
+  },
   { label: "IT Consulting", href: "/services/it-consulting" },
 ];
 
@@ -29,8 +41,12 @@ const training = [
     href: "/training/web-digital-technology",
   },
   {
+    label: "Business Technology",
+    href: "/training/business-technology",
+  },
+  {
     label: "Corporate Training",
-    href: "/training/corporate",
+    href: "/training",
   },
 ];
 
@@ -51,22 +67,32 @@ export default function Footer() {
           {/* Company */}
           <div>
             <Link href="/" className="inline-flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-700 text-lg font-black text-white">
-                M
+              <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-white p-1">
+                <Image
+                  src="/images/branding/mict-technology-solutions-logo.png"
+                  alt="MICT Technology Solutions"
+                  width={48}
+                  height={48}
+                  className="h-full w-full object-contain"
+                />
               </div>
 
               <div>
-                <div className="text-base font-extrabold">MICT</div>
+                <div className="text-base font-extrabold">
+                  MICT Technology Solutions
+                </div>
+
                 <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
-                  Technology Solutions
+                  Technology • Innovation • Growth
                 </div>
               </div>
             </Link>
 
             <p className="mt-6 max-w-sm text-sm leading-6 text-slate-400">
-              MICT E-Learning Services Ltd provides technology solutions and
-              professional training that help organizations and individuals
-              build, operate and benefit from modern digital systems.
+              MICT Technology Solutions provides professional IT services,
+              digital solutions, data-driven systems, business automation and
+              practical technology training that help organizations and
+              individuals build, operate and benefit from modern technology.
             </p>
 
             <div className="mt-6 space-y-2 text-sm text-slate-400">
@@ -149,21 +175,21 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p className="text-slate-500">
-            © {new Date().getFullYear()} MICT E-Learning Services Ltd. All
-            rights reserved.
+            © {new Date().getFullYear()} MICT Technology Solutions. All rights
+            reserved.
           </p>
 
           <div className="flex gap-5">
             <Link
               href="/privacy"
-              className="text-slate-500 hover:text-white"
+              className="text-slate-500 transition-colors hover:text-white"
             >
               Privacy Policy
             </Link>
 
             <Link
               href="/terms"
-              className="text-slate-500 hover:text-white"
+              className="text-slate-500 transition-colors hover:text-white"
             >
               Terms
             </Link>
@@ -173,3 +199,4 @@ export default function Footer() {
     </footer>
   );
 }
+

@@ -47,16 +47,37 @@ const solutions = [
 
 export default function Solutions() {
   return (
-    <section className="bg-white py-20 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-white py-20 sm:py-24">
+      {/* Background technology pattern */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.035]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(#0f172a 1px, transparent 1px),
+              linear-gradient(90deg, #0f172a 1px, transparent 1px)
+            `,
+            backgroundSize: "52px 52px",
+          }}
+        />
+      </div>
+
+      <div className="pointer-events-none absolute -left-40 top-40 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 top-[45%] h-80 w-80 rounded-full bg-green-500/10 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-700">
-            Business Solutions
-          </p>
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2">
+            <span className="h-2 w-2 rounded-full bg-blue-600" />
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
-            We don't just deliver technology. We solve business problems.
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700 sm:text-sm">
+              Business Solutions
+            </p>
+          </div>
+
+          <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+            We don&apos;t just deliver technology. We solve business problems.
           </h2>
 
           <p className="mt-5 text-base leading-7 text-slate-600 sm:text-lg">
@@ -71,47 +92,82 @@ export default function Solutions() {
           {solutions.map((solution) => (
             <article
               key={solution.number}
-              className="group rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-900/5"
             >
-              <div className="flex items-center justify-between">
+              {/* Large background number */}
+              <span className="pointer-events-none absolute -right-2 -top-4 text-8xl font-black leading-none text-slate-950/[0.035] transition-colors duration-300 group-hover:text-blue-600/[0.08]">
+                {solution.number}
+              </span>
+
+              <div className="relative flex items-center justify-between">
                 <span className="text-sm font-extrabold text-blue-700">
                   {solution.number}
                 </span>
 
-                <span className="h-2 w-10 rounded-full bg-gradient-to-r from-blue-600 to-green-500 transition-all group-hover:w-14" />
+                <span className="flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                  <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-blue-600 to-green-500 transition-all duration-300 group-hover:w-10" />
+                </span>
               </div>
 
-              <h3 className="mt-7 text-xl font-bold text-slate-950">
+              <h3 className="relative mt-7 text-xl font-bold text-slate-950">
                 {solution.title}
               </h3>
 
-              <p className="mt-3 text-sm leading-6 text-slate-600">
+              <p className="relative mt-3 text-sm leading-6 text-slate-600">
                 {solution.description}
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {solution.tags.map((tag) => (
+              <div className="relative mt-6 flex flex-wrap gap-2">
+                {solution.tags.map((tag, index) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600"
+                    className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
+                      index === 0
+                        ? "bg-blue-50 text-blue-700"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
                   >
                     {tag}
                   </span>
                 ))}
               </div>
+
+              {/* Hover accent */}
+              <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-600 to-green-500 transition-all duration-300 group-hover:w-full" />
             </article>
           ))}
         </div>
 
         {/* Strategic healthcare positioning */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-slate-950">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="p-7 sm:p-10 lg:p-12">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-green-400">
-                Digital Healthcare
-              </p>
+        <div className="relative mt-10 overflow-hidden rounded-[2rem] bg-slate-950 shadow-2xl shadow-slate-900/10">
+          {/* Decorative background */}
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute right-[-8rem] top-[-8rem] h-80 w-80 rounded-full bg-green-500/10 blur-3xl" />
 
-              <h3 className="mt-3 max-w-2xl text-2xl font-bold text-white sm:text-3xl">
+            <div
+              className="absolute inset-0 opacity-[0.035]"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)
+                `,
+                backgroundSize: "44px 44px",
+              }}
+            />
+          </div>
+
+          <div className="relative grid lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="p-7 sm:p-10 lg:p-12">
+              <div className="inline-flex items-center gap-2 rounded-full border border-green-400/20 bg-green-500/10 px-4 py-2">
+                <span className="h-2 w-2 rounded-full bg-green-400 shadow-[0_0_12px_rgba(74,222,128,0.7)]" />
+
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-300 sm:text-sm">
+                  Digital Healthcare
+                </p>
+              </div>
+
+              <h3 className="mt-5 max-w-2xl text-2xl font-bold text-white sm:text-3xl">
                 Building secure digital platforms for modern healthcare
                 experiences.
               </h3>
@@ -126,16 +182,19 @@ export default function Solutions() {
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href="/solutions/healthcare"
-                  className="inline-flex items-center justify-center rounded-full bg-green-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-green-500"
+                  href="/solutions"
+                  className="group inline-flex items-center justify-center rounded-full bg-green-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-green-500 hover:shadow-lg hover:shadow-green-900/30"
                 >
                   Healthcare Solutions
-                  <span className="ml-2">→</span>
+
+                  <span className="ml-2 transition-transform duration-200 group-hover:translate-x-1">
+                    →
+                  </span>
                 </Link>
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center rounded-full border border-slate-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white hover:bg-white/5"
                 >
                   Discuss a Project
                 </Link>
@@ -159,7 +218,7 @@ export default function Solutions() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3"
+                    className="group/item flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition-colors hover:border-green-400/20 hover:bg-green-500/5"
                   >
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-500 text-xs font-bold text-white">
                       ✓
@@ -177,10 +236,13 @@ export default function Solutions() {
         <div className="mt-10 text-center">
           <Link
             href="/solutions"
-            className="inline-flex items-center rounded-full border border-blue-700 px-6 py-3 text-sm font-bold text-blue-700 transition-colors hover:bg-blue-700 hover:text-white"
+            className="group inline-flex items-center rounded-full border border-blue-700 px-6 py-3 text-sm font-bold text-blue-700 transition-all hover:bg-blue-700 hover:text-white hover:shadow-lg hover:shadow-blue-900/20"
           >
             Explore Business Solutions
-            <span className="ml-2">→</span>
+
+            <span className="ml-2 transition-transform duration-200 group-hover:translate-x-1">
+              →
+            </span>
           </Link>
         </div>
       </div>

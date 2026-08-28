@@ -1,16 +1,5 @@
 import ContactForm from "@/components/sections/ContactForm";
-
-import Link from "next/link";
-
-const enquiryTypes = [
-  "IT Services",
-  "Software / Platform Development",
-  "Data & Analytics",
-  "IT Consulting",
-  "Training & E-Learning",
-  "Corporate Training",
-  "Other Technology Requirement",
-];
+import { ArrowRight } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -24,7 +13,7 @@ export default function ContactPage() {
             </p>
 
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Let's discuss what you want to achieve.
+              Let&apos;s discuss what you want to achieve.
             </h1>
 
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
@@ -73,8 +62,9 @@ export default function ContactPage() {
                     +234 803 8721 296
                   </p>
 
-                  <p className="mt-1 text-sm text-slate-400">
-                    Send us a WhatsApp message →
+                  <p className="mt-1 inline-flex items-center text-sm text-slate-400">
+                    Send us a WhatsApp message
+                    <ArrowRight size={16} className="ml-2" />
                   </p>
                 </a>
 
@@ -127,13 +117,12 @@ export default function ContactPage() {
                 </h2>
 
                 <p className="mt-4 text-sm leading-7 text-slate-600">
-                  Provide some initial information and we'll have a better
+                  Provide some initial information and we&apos;ll have a better
                   understanding of how we can assist.
                 </p>
               </div>
 
-            <ContactForm />
-
+              <ContactForm />
             </div>
           </div>
         </div>
@@ -158,9 +147,10 @@ export default function ContactPage() {
             href="https://wa.me/2348038721296?text=Hello%20MICT%2C%20I%20would%20like%20to%20discuss%20a%20technology%20project."
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-7 inline-flex rounded-full bg-white px-7 py-3.5 text-sm font-bold text-green-700 transition-colors hover:bg-green-50"
+            className="mt-7 inline-flex items-center rounded-full bg-white px-7 py-3.5 text-sm font-bold text-green-700 transition-colors hover:bg-green-50"
           >
-            Chat on WhatsApp →
+            Chat on WhatsApp
+            <ArrowRight size={17} className="ml-2" />
           </a>
         </div>
       </section>

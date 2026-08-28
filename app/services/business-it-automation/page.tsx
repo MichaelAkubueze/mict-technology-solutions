@@ -305,7 +305,7 @@ export default function BusinessItAutomationPage() {
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
             Tell us about the workflow, repetitive task or operational
-            challenge you want to improve and let's explore the right
+            challenge you want to improve and let&apos;s explore the right
             technology approach.
           </p>
 

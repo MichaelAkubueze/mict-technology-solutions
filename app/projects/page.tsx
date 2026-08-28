@@ -324,7 +324,7 @@ export default function ProjectsPage() {
           <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-5">
             <p className="text-sm leading-6 text-amber-900">
               <strong>Portfolio classification:</strong> This healthcare
-              platform is presented as a solution concept demonstrating MICT's
+              platform is presented as a solution concept demonstrating MICT&apos;s
               understanding of the technology requirements. It is not
               presented as a completed client implementation.
             </p>
