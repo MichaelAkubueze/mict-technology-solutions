@@ -97,9 +97,9 @@ export default function ContactPage() {
                   </p>
 
                   <p className="mt-1 text-sm leading-6 text-slate-400">
-                    26A Aba Road, Off Market Junction,
+                    SSAC PLAZA, Kilometer 60 Port Harcourt–Aba Expressway,
                     <br />
-                    Port Harcourt, Rivers State, Nigeria
+                    Opposite Timber Bus Stop, Oyigbo, Rivers State, Nigeria
                   </p>
                 </div>
               </div>

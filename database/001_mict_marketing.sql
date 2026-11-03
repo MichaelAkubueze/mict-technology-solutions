@@ -1,0 +1,80 @@
+CREATE TABLE IF NOT EXISTS mict_marketing_leads (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  email VARCHAR(254) NOT NULL,
+  full_name VARCHAR(160) NOT NULL,
+  phone VARCHAR(40) NULL,
+  segment VARCHAR(64) NULL,
+  score SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+  score_band VARCHAR(16) NOT NULL DEFAULT 'cold',
+  source VARCHAR(64) NULL,
+  medium VARCHAR(64) NULL,
+  campaign VARCHAR(128) NULL,
+  content VARCHAR(128) NULL,
+  term VARCHAR(128) NULL,
+  consent_marketing TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_mict_lead_email (email),
+  KEY idx_mict_lead_campaign (campaign),
+  KEY idx_mict_lead_score (score)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS mict_marketing_checkouts (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  lead_id BIGINT UNSIGNED NOT NULL,
+  reference VARCHAR(100) NOT NULL,
+  amount_minor BIGINT UNSIGNED NOT NULL,
+  currency CHAR(3) NOT NULL DEFAULT 'NGN',
+  status VARCHAR(32) NOT NULL DEFAULT 'initialized',
+  authorization_url TEXT NOT NULL,
+  source VARCHAR(64) NULL,
+  medium VARCHAR(64) NULL,
+  campaign VARCHAR(128) NULL,
+  content VARCHAR(128) NULL,
+  term VARCHAR(128) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_mict_checkout_reference (reference),
+  KEY idx_mict_checkout_lead (lead_id),
+  CONSTRAINT fk_mict_checkout_lead FOREIGN KEY (lead_id) REFERENCES mict_marketing_leads(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS mict_marketing_payments (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  checkout_id BIGINT UNSIGNED NULL,
+  lead_id BIGINT UNSIGNED NULL,
+  paystack_transaction_id BIGINT UNSIGNED NULL,
+  reference VARCHAR(100) NOT NULL,
+  status VARCHAR(32) NOT NULL,
+  amount_minor BIGINT UNSIGNED NOT NULL,
+  currency CHAR(3) NOT NULL,
+  paid_at DATETIME NULL,
+  channel VARCHAR(64) NULL,
+  gateway_response VARCHAR(255) NULL,
+  raw_event_json JSON NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_mict_payment_reference (reference),
+  KEY idx_mict_payment_status (status),
+  KEY idx_mict_payment_lead (lead_id),
+  CONSTRAINT fk_mict_payment_checkout FOREIGN KEY (checkout_id) REFERENCES mict_marketing_checkouts(id),
+  CONSTRAINT fk_mict_payment_lead FOREIGN KEY (lead_id) REFERENCES mict_marketing_leads(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS mict_marketing_enrolments (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  lead_id BIGINT UNSIGNED NOT NULL,
+  payment_id BIGINT UNSIGNED NOT NULL,
+  course_slug VARCHAR(100) NOT NULL,
+  cohort_slug VARCHAR(100) NOT NULL,
+  status VARCHAR(32) NOT NULL DEFAULT 'confirmed',
+  confirmed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_mict_enrolment_payment (payment_id),
+  KEY idx_mict_enrolment_lead (lead_id),
+  CONSTRAINT fk_mict_enrolment_lead FOREIGN KEY (lead_id) REFERENCES mict_marketing_leads(id),
+  CONSTRAINT fk_mict_enrolment_payment FOREIGN KEY (payment_id) REFERENCES mict_marketing_payments(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

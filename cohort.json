@@ -1,0 +1,17 @@
+{
+  "course_slug": "data-analytics",
+  "course_name": "AI-Powered Data Analytics & Business Intelligence Bootcamp",
+  "cohort_name": "Founding Cohort",
+  "currency": "NGN",
+  "registration_fee": 15000,
+  "payment_gateway": "paystack",
+  "registration_close": "2026-10-14T23:59:59+01:00",
+  "training_start": "2026-10-16T00:00:00+01:00",
+  "primary_support_channel": "WhatsApp",
+  "paystack_checkout_url": null,
+  "whatsapp_url": "https://wa.me/2348038721296",
+  "primary_cta": "Register Now",
+  "fallback_cta": "Chat on WhatsApp",
+  "timezone": "Africa/Lagos",
+  "cohort_slug": "data-analytics-founding-cohort"
+}

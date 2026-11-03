@@ -36,7 +36,7 @@ export async function submitEnquiry(
 
   try {
     const { error } = await resend.emails.send({
-      from: "MICT Website <onboarding@resend.dev>",
+      from: "MICT Technology Solutions <noreply@micttechnologysolutions.com>",
       to: [process.env.CONTACT_EMAIL],
       replyTo: email,
       subject: `New MICT Website Enquiry — ${enquiry}`,
