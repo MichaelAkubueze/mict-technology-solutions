@@ -96,8 +96,8 @@ export default function Footer() {
             </p>
 
             <div className="mt-6 space-y-2 text-sm text-slate-400">
-              <p>26A Aba Road, Off Market Junction</p>
-              <p>Port Harcourt, Rivers State, Nigeria</p>
+              <p>SSAC PLAZA, Kilometer 60 Port Harcourt-Aba Expressway,</p>
+              <p>Opposite Timber Bus Stop, Oyigbo, Rivers State, Nigeria</p>
             </div>
 
             <a
