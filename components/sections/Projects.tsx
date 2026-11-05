@@ -13,7 +13,7 @@ const projects = [
     description:
       "Data-driven executive dashboards and analytical reporting designed to give leadership teams clearer visibility into revenue, profitability, customers, operations and business performance.",
     tags: ["Data Analytics", "KPI Dashboards", "Executive Reporting"],
-    href: "/projects/executive-performance-intelligence",
+    href: "/projects#executive-performance-intelligence",
     icon: BarChart3,
     accent: "blue",
   },
@@ -23,7 +23,7 @@ const projects = [
     description:
       "A modular technology platform combining fleet operations, vehicle management, maintenance, fuel intelligence and predictive analytics.",
     tags: ["Fleet Management", "Predictive Analytics", "Enterprise Systems"],
-    href: "/projects/fleet-intelligence",
+    href: "/projects#fleet-intelligence",
     icon: ServerCog,
     accent: "green",
   },
@@ -33,7 +33,7 @@ const projects = [
     description:
       "Secure web-based platforms designed to connect users, business processes, information and operational workflows through a unified digital experience.",
     tags: ["Portal Development", "Web Applications", "Automation"],
-    href: "/projects/business-platforms",
+    href: "/projects#business-platforms",
     icon: Globe2,
     accent: "blue",
   },

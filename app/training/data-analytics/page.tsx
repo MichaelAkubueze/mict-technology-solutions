@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PaystackCheckout from "@/components/training/PaystackCheckout";
+
 import PaymentStatus from "@/components/training/PaymentStatus";
 import Link from "next/link";
 import {
@@ -164,7 +164,7 @@ const faqs = [
   ],
   [
     "How will I pay?",
-    "The founding-cohort registration is handled through MICT's secure Paystack checkout. If you need help before or after payment, contact MICT on WhatsApp.",
+    "Choose Paystack or Flutterwave during registration to complete your payment securely. If you need help before or after payment, contact MICT on WhatsApp.",
   ],
 ];
 
@@ -251,7 +251,7 @@ export default function DataAnalyticsBootcampPage() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="#paystack-checkout"
+                href="/training/data-analytics/register"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-green-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-green-500 hover:shadow-lg"
               >
                 Join the Founding Cohort — ₦15,000
@@ -629,7 +629,7 @@ export default function DataAnalyticsBootcampPage() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-green-700">Choose Your Cohort</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Start with the founding cohort.</h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">Start with the founding cohort and complete registration securely through the MICT Paystack checkout.</p>
+            <p className="mt-4 text-base leading-7 text-slate-600">Start with the founding cohort and choose your preferred secure payment method during registration.</p>
           </div>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
@@ -677,7 +677,7 @@ export default function DataAnalyticsBootcampPage() {
             />
           </div>
 
-          <PaystackCheckout />
+
         </div>
       </section>
 
@@ -710,14 +710,14 @@ export default function DataAnalyticsBootcampPage() {
           <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">Learn. Build. Analyse. Present.</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-green-50">Join the MICT founding cohort and start building practical analytics skills through real business projects.</p>
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="#paystack-checkout" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-black text-green-700 transition hover:bg-green-50">
+            <Link href="/training/data-analytics/register" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-black text-green-700 transition hover:bg-green-50">
               Join the Founding Cohort — ₦15,000 <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-white/10">
               Chat With MICT
             </Link>
           </div>
-          <p className="mt-4 text-xs font-semibold text-green-100">Secure checkout via Paystack.</p>
+          <p className="mt-4 text-xs font-semibold text-green-100">Secure payment options via Paystack and Flutterwave.</p>
         </div>
       </section>
 
@@ -728,7 +728,7 @@ export default function DataAnalyticsBootcampPage() {
             <p className="truncate text-[10px] font-bold uppercase tracking-wider text-green-700">Founding Cohort</p>
             <p className="text-sm font-black text-slate-950">₦15,000</p>
           </div>
-          <Link href="#paystack-checkout" className="inline-flex shrink-0 items-center justify-center rounded-full bg-green-600 px-5 py-3 text-xs font-black text-white hover:bg-green-700">
+          <Link href="/training/data-analytics/register" className="inline-flex shrink-0 items-center justify-center rounded-full bg-green-600 px-5 py-3 text-xs font-black text-white hover:bg-green-700">
             Enroll Now
           </Link>
         </div>
@@ -766,10 +766,10 @@ function PricingCard({
         ))}
       </ul>
       <Link
-        href={featured ? "#paystack-checkout" : "/contact"}
+        href={featured ? "/training/data-analytics/register" : "/contact"}
         className={`mt-8 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-bold ${featured ? "bg-green-600 text-white hover:bg-green-500" : "bg-blue-700 text-white hover:bg-blue-800"}`}
       >
-        {featured ? "Register with Paystack" : "Discuss This Package"}
+        {featured ? "Register Now" : "Discuss This Package"}
       </Link>
     </article>
   );

@@ -142,8 +142,12 @@ export default function CohortPopup() {
                   Classes Start
                 </p>
                 <p className="mt-1 text-sm font-bold text-slate-900">
-                  16 October 2026
-                </p>
+                    {new Date(cohortCampaign.trainingStart).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                })}
+</p>
               </div>
             </div>
 
@@ -251,7 +255,13 @@ export default function CohortPopup() {
           </button>
 
           <p className="mt-3 text-center text-xs text-slate-400">
-            Registration closes on 14 October 2026.
+            Registration closes on{" "}
+            {new Date(cohortCampaign.registrationClose).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+              year: "numeric",
+          })}
+          .
           </p>
         </div>
       </div>

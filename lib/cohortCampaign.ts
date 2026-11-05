@@ -8,7 +8,7 @@ export const cohortCampaign = {
   description:
     "Build practical skills in data analytics, business intelligence, data visualization and AI-powered data workflows.",
 
-  registrationOpen: "2026-11-02T00:00:00",
+  registrationOpen: "2026-11-05T00:00:00",
   registrationClose: "2026-11-30T23:59:59",
 
   trainingStart: "2026-11-16T00:00:00",

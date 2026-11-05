@@ -196,6 +196,15 @@ export default function ProjectsPage() {
             {projects.map((project, index) => (
               <article
                 key={project.title}
+                id={
+                  index === 0
+                    ? "executive-performance-intelligence"
+                    : index === 1
+                      ? "fleet-intelligence"
+                      : index === 2
+                        ? "business-platforms"
+                        : undefined
+                }
                 className="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
               >
                 {/* Visual */}
