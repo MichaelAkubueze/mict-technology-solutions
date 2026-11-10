@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 import { verifyPaystackSignature } from '@/lib/paystack/signature';
 import { verifyPaystack } from '@/lib/paystack/client';
 import { recordVerifiedPayment } from '@/lib/db/mysql';
-import { marketingConfig } from '@/lib/marketing/config';
 
 export const runtime = 'nodejs';
 
@@ -43,8 +42,9 @@ export async function POST(request: Request) {
       data.id <= 0 ||
       typeof data.amount !== 'number' ||
       !Number.isSafeInteger(data.amount) ||
-      data.amount !== marketingConfig.priceMinor ||
-      data.currency !== marketingConfig.currency
+      data.amount <= 0 ||
+      typeof data.currency !== 'string' ||
+      !data.currency.trim()
     ) {
       return NextResponse.json(
         { error: 'Invalid payment event details' },
@@ -59,9 +59,7 @@ export async function POST(request: Request) {
       verified.status !== 'success' ||
       verified.reference !== data.reference ||
       verified.id !== data.id ||
-      verified.amount !== marketingConfig.priceMinor ||
       verified.amount !== data.amount ||
-      verified.currency !== marketingConfig.currency ||
       verified.currency !== data.currency
     ) {
       return NextResponse.json(

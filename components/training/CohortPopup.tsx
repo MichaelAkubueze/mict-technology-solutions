@@ -89,12 +89,12 @@ export default function CohortPopup() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto overscroll-contain bg-slate-950/70 p-3 backdrop-blur-sm sm:items-center sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="cohort-popup-title"
     >
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+      <div className="relative my-auto flex max-h-[calc(100dvh-1.5rem)] w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
         {/* Decorative background */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-green-400/20 blur-3xl" />
@@ -111,7 +111,7 @@ export default function CohortPopup() {
           <X size={20} />
         </button>
 
-        <div className="relative p-6 sm:p-8 md:p-10">
+        <div className="relative min-h-0 overflow-y-auto p-5 pt-16 sm:p-8 sm:pt-16 md:p-10 md:pt-16">
           {/* Campaign badge */}
           <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-green-700">
             <span className="h-2 w-2 animate-pulse rounded-full bg-green-600" />
@@ -219,12 +219,7 @@ export default function CohortPopup() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href={cohortCampaign.registrationUrl}
-              onClick={() => {
-                window.localStorage.setItem(
-                  DISMISSAL_KEY,
-                  Date.now().toString()
-                );
-              }}
+              onNavigate={handleClose}
               className="group inline-flex flex-1 items-center justify-center rounded-full bg-green-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-green-700 hover:shadow-lg hover:shadow-green-900/20"
             >
               Register Now

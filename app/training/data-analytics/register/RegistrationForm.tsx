@@ -14,6 +14,7 @@ import {
   User,
 } from "lucide-react";
 import { cohortCampaign } from "@/lib/cohortCampaign";
+import { trainingPackages, type TrainingPackageId } from "@/lib/marketing/packages";
 
 type FormData = {
   fullName: string;
@@ -45,6 +46,8 @@ export default function DataAnalyticsRegistrationPage() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [paymentGateway, setPaymentGateway] =
     useState<PaymentGateway>("flutterwave");
+  const [selectedPackageId, setSelectedPackageId] = useState<TrainingPackageId>("professional");
+  const selectedPackage = trainingPackages[selectedPackageId];
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -78,6 +81,7 @@ export default function DataAnalyticsRegistrationPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          packageId: selectedPackageId,
           fullName: formData.fullName,
           email: formData.email,
           phone: formData.phone,
@@ -141,7 +145,7 @@ export default function DataAnalyticsRegistrationPage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-400/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-green-300">
               <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
-              Founding Cohort Registration
+              Bootcamp Registration
             </div>
 
             <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
@@ -450,13 +454,56 @@ export default function DataAnalyticsRegistrationPage() {
                 </div>
               </div>
 
+
+              <div className="border-t border-slate-100 pt-8">
+                <h3 className="text-lg font-bold text-slate-900">
+                  Choose Your Training Package
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-slate-500">
+                  Choose your level of support. All options are for the same eight-week bootcamp.
+                </p>
+                <div className="mt-5 grid gap-4">
+                  {Object.values(trainingPackages).map((pkg) => {
+                    const isSelected = selectedPackageId === pkg.id;
+                    return (
+                      <button
+                        key={pkg.id}
+                        type="button"
+                        aria-pressed={isSelected}
+                        onClick={() => setSelectedPackageId(pkg.id)}
+                        className={`relative w-full rounded-2xl border p-5 text-left transition ${pkg.recommended ? "border-green-500 bg-green-50 shadow-md" : "border-slate-200 bg-white"} ${isSelected ? "ring-2 ring-green-500" : ""}`}
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                          <span className="font-bold text-slate-900">{pkg.name}</span>
+                          <span className="text-xl font-extrabold text-slate-950">{pkg.priceLabel}</span>
+                        </div>
+                        {pkg.recommended && (
+                          <span className="mt-2 inline-block rounded-full bg-green-600 px-3 py-1 text-xs font-bold text-white">
+                            Recommended
+                          </span>
+                        )}
+                        <p className="mt-2 text-sm text-slate-600">{pkg.description}</p>
+                        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                          {pkg.features.map((feature) => (
+                            <li key={feature} className="flex items-start gap-2 text-xs leading-5 text-slate-600">
+                              <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-green-600" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div className="border-t border-slate-100 pt-8">
                 <h3 className="text-lg font-bold text-slate-900">
                   Choose Payment Method
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-slate-500">
-                  Select how you would like to pay the founding cohort fee of{" "}
-                  <strong>{cohortCampaign.foundingFee}</strong>. You will be
+                  You are registering for the {selectedPackage.name} package at{" "}
+                  <strong>{selectedPackage.priceLabel}</strong>. You will be
                   redirected to the selected provider's secure checkout.
                 </p>
 
@@ -581,7 +628,7 @@ export default function DataAnalyticsRegistrationPage() {
 
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.15em] text-green-400">
-                      Founding Cohort
+                      {selectedPackage.name} Package
                     </p>
 
                     <p className="mt-1 text-lg font-bold">
@@ -624,16 +671,15 @@ export default function DataAnalyticsRegistrationPage() {
 
                 <div className="rounded-2xl border border-green-200 bg-green-50 p-5">
                   <p className="text-xs font-bold uppercase tracking-wide text-green-700">
-                    Founding Cohort Fee
+                    Selected Package Fee
                   </p>
 
                   <p className="mt-1 text-3xl font-bold text-slate-950">
-                    {cohortCampaign.foundingFee}
+                    {selectedPackage.priceLabel}
                   </p>
 
                   <p className="mt-1 text-xs text-slate-500">
-                    Standard fee:{" "}
-                    {cohortCampaign.standardFee}
+                    {selectedPackage.description}
                   </p>
                 </div>
 

@@ -1,6 +1,5 @@
 ﻿
 import { NextRequest, NextResponse } from 'next/server';
-import { marketingConfig } from '@/lib/marketing/config';
 import { recordVerifiedPayment } from '@/lib/db/mysql';
 
 export const runtime = 'nodejs';
@@ -22,11 +21,13 @@ type FlutterwaveVerificationResponse = {
 };
 
 function redirectWithStatus(
-  request: NextRequest,
   status: string,
   reference?: string,
 ): NextResponse {
-  const url = new URL('/training/data-analytics', request.url);
+  const url = new URL(
+    '/training/data-analytics',
+    'https://micttechnologysolutions.com',
+  );
   url.searchParams.set('payment', status);
 
   if (reference) {
@@ -48,14 +49,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     !transactionId ||
     !/^\d+$/.test(transactionId)
   ) {
-    return redirectWithStatus(request, 'verification_failed');
+    return redirectWithStatus('verification_failed');
   }
 
   const secretKey = process.env.FLUTTERWAVE_SECRET_KEY;
 
   if (!secretKey) {
     console.error('Flutterwave secret key is not configured.');
-    return redirectWithStatus(request, 'verification_failed', reference);
+    return redirectWithStatus('verification_failed', reference);
   }
 
   try {
@@ -94,14 +95,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const amountMinor = amountNaira * 100;
 
     const currency = String(payment.currency ?? '').toUpperCase();
-    const expectedCurrency = String(marketingConfig.currency).toUpperCase();
 
     // Reject incorrect amounts and currencies before recording anything.
     if (
       !Number.isFinite(amountNaira) ||
       !Number.isSafeInteger(amountMinor) ||
-      amountMinor !== marketingConfig.priceMinor ||
-      currency !== expectedCurrency
+      amountMinor <= 0 ||
+      !currency
     ) {
       throw new Error('Flutterwave amount or currency mismatch');
     }
@@ -131,7 +131,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     });
 
     return redirectWithStatus(
-      request,
       successful ? 'success' : 'failed',
       reference,
     );
@@ -139,7 +138,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     console.error('Flutterwave callback verification failed:', error);
 
     return redirectWithStatus(
-      request,
       'verification_failed',
       reference,
     );

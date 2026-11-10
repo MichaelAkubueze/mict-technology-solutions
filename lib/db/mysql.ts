@@ -104,6 +104,8 @@ export async function insertCheckout(input: {
   reference: string;
   amountMinor: number;
   currency: string;
+  packageId: string;
+  packageName: string;
   authorizationUrl: string;
   gateway?: PaymentGateway;
   attribution?: LeadInput['attribution'];
@@ -118,16 +120,19 @@ export async function insertCheckout(input: {
 
   const [result] = await db.execute(
     `INSERT INTO mict_marketing_checkouts
-      (lead_id, reference, amount_minor, currency, status,
-       authorization_url, gateway, source, medium, campaign, content, term)
-     VALUES (?, ?, ?, ?, 'initialized', ?, ?, ?, ?, ?, ?, ?)`,
+      (lead_id, reference, gateway, package_id, package_name,
+       amount_minor, currency, status, authorization_url,
+       source, medium, campaign, content, term)
+     VALUES (?, ?, ?, ?, ?, ?, ?, 'initialized', ?, ?, ?, ?, ?, ?)`,
     [
       input.leadId,
       input.reference,
+      gateway,
+      input.packageId,
+      input.packageName,
       input.amountMinor,
       input.currency,
       input.authorizationUrl,
-      gateway,
       a.source ?? null,
       a.medium ?? null,
       a.campaign ?? null,
@@ -382,6 +387,22 @@ export async function recordVerifiedPayment(input: {
           );
         }
       }
+    }
+
+    if (effectiveStatus === 'success' && payment?.id && payment?.lead_id) {
+      const moodleCourseId = Number(process.env.MOODLE_COURSE_ID);
+
+      if (!Number.isSafeInteger(moodleCourseId) || moodleCourseId <= 0) {
+        throw new Error('Invalid Moodle course ID configuration');
+      }
+
+      await conn.execute(
+        `INSERT INTO mict_moodle_provisioning_jobs
+          (payment_id, lead_id, course_id, status)
+         VALUES (?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)`,
+        [Number(payment.id), Number(payment.lead_id), moodleCourseId, 'pending'],
+      );
     }
 
     await conn.commit();

@@ -1,3 +1,4 @@
+process.loadEnvFile(".env.production");
 const next = require("next");
 
 const port = parseInt(process.env.PORT || "3000", 10);

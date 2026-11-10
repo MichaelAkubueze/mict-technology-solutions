@@ -1,6 +1,5 @@
 ﻿import { timingSafeEqual } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { marketingConfig } from '@/lib/marketing/config';
 import { recordVerifiedPayment } from '@/lib/db/mysql';
 
 export const runtime = 'nodejs';
@@ -125,15 +124,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const amountMinor = amountNaira * 100;
 
     const currency = String(payment.currency ?? '').toUpperCase();
-    const expectedCurrency = String(marketingConfig.currency).toUpperCase();
 
     if (
       !Number.isFinite(amountNaira) ||
       !Number.isSafeInteger(amountMinor) ||
       amountMinor <= 0 ||
-      amountMinor !== marketingConfig.priceMinor ||
-      !currency ||
-      currency !== expectedCurrency
+      !currency
     ) {
       throw new Error('Flutterwave amount or currency is invalid');
     }

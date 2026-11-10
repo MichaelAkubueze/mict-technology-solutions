@@ -8,7 +8,10 @@ import {
   Globe,
   ShieldCheck,
   Check,
+  CalendarDays,
+  Clock3,
 } from "lucide-react";
+import { cohortCampaign } from "@/lib/cohortCampaign";
 
 const trainingAreas = [
   {
@@ -107,6 +110,61 @@ export default function Training() {
             organizations develop the technical capabilities required to
             succeed in a digital economy.
           </p>
+        </div>
+
+        {/* Featured bootcamp: remains available after the popup is dismissed */}
+        <div className="relative mt-10 overflow-hidden rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-950 via-blue-900 to-green-900 p-6 text-white shadow-xl sm:p-8 lg:p-10">
+          <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-green-400/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-blue-400/20 blur-3xl" />
+
+          <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <span className="inline-flex items-center rounded-full border border-green-300/40 bg-green-400/15 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-green-200">
+                Featured upcoming bootcamp
+              </span>
+
+              <h3 className="mt-4 max-w-3xl text-2xl font-bold tracking-tight sm:text-3xl">
+                {cohortCampaign.shortName}
+              </h3>
+
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-blue-100 sm:text-base">
+                {cohortCampaign.description}
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-white/90">
+                <span className="inline-flex items-center gap-2">
+                  <CalendarDays size={17} className="text-green-300" />
+                  Starts {new Date(cohortCampaign.trainingStart).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+                </span>
+
+                <span className="inline-flex items-center gap-2">
+                  <Clock3 size={17} className="text-green-300" />
+                  {cohortCampaign.duration} · {cohortCampaign.format}
+                </span>
+
+                <span className="inline-flex items-center gap-2">
+                  <Check size={17} className="text-green-300" />
+                  Founding fee: {cohortCampaign.foundingFee}
+                </span>
+              </div>
+            </div>
+
+            <div className="relative flex flex-col gap-3 sm:flex-row lg:min-w-52 lg:flex-col">
+              <Link
+                href={cohortCampaign.registrationUrl}
+                className="inline-flex items-center justify-center rounded-full bg-green-500 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-green-400"
+              >
+                Register for Bootcamp <ArrowRight size={18} className="ml-2" />
+              </Link>
+
+              <Link
+                href="/training/data-analytics"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-white/20"
+              >
+                Explore Programme
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Training areas */}

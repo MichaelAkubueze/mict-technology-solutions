@@ -1,21 +1,22 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { marketingConfig } from '@/lib/marketing/config';
 import { verifyPaystack } from '@/lib/paystack/client';
 import { recordVerifiedPayment } from '@/lib/db/mysql';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-function getTrainingUrl(request: NextRequest): URL {
-  return new URL('/training/data-analytics', request.url);
+function getTrainingUrl(): URL {
+  return new URL(
+    '/training/data-analytics',
+    'https://micttechnologysolutions.com',
+  );
 }
 
 function redirectWithStatus(
-  request: NextRequest,
   status: string,
   reference?: string,
 ): NextResponse {
-  const url = getTrainingUrl(request);
+  const url = getTrainingUrl();
   url.searchParams.set('payment', status);
 
   if (reference) {
@@ -35,7 +36,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     searchParams.get('trxref')?.trim();
 
   if (!reference || !/^MICT-[A-Za-z0-9_-]+$/.test(reference)) {
-    return redirectWithStatus(request, 'verification_failed');
+    return redirectWithStatus('verification_failed');
   }
 
   try {
@@ -48,10 +49,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     }
 
     const amountMinor = Number(payment.amount);
-    const expectedAmountMinor = Number(marketingConfig.priceMinor);
-
     const currency = String(payment.currency ?? '').toUpperCase();
-    const expectedCurrency = String(marketingConfig.currency).toUpperCase();
 
     const transactionId = Number(payment.id);
 
@@ -60,10 +58,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const validAmount =
       Number.isSafeInteger(amountMinor) &&
-      amountMinor > 0 &&
-      amountMinor === expectedAmountMinor;
+      amountMinor > 0;
 
-    const validCurrency = currency === expectedCurrency;
+    const validCurrency = currency.length > 0;
 
     const successful =
       payment.status === 'success' &&
@@ -97,7 +94,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     });
 
     return redirectWithStatus(
-      request,
       successful ? 'success' : 'failed',
       reference,
     );
@@ -107,7 +103,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     console.error('Paystack callback verification failed:', error);
 
     return redirectWithStatus(
-      request,
       'verification_failed',
       reference,
     );

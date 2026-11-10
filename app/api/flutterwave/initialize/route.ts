@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { marketingConfig } from '@/lib/marketing/config';
+import { getTrainingPackage } from '@/lib/marketing/packages';
 import { readAttribution } from '@/lib/marketing/utm';
 import {
   upsertLead,
@@ -16,6 +17,7 @@ export const dynamic = 'force-dynamic';
 
 const schema = z.object({
   fullName: z.string().trim().min(2).max(160),
+  packageId: z.enum(['founding', 'professional', 'premium']),
   email: z.string().trim().email().max(254),
   phone: z.string().trim().min(7).max(40),
   location: z.string().trim().min(2).max(120),
@@ -49,6 +51,15 @@ export async function POST(request: Request) {
   }
 
   try {
+    const selectedPackage = getTrainingPackage(body.packageId);
+
+    if (!selectedPackage) {
+      return NextResponse.json(
+        { error: 'Please select a valid training package.' },
+        { status: 400 },
+      );
+    }
+
     const attribution = readAttribution(
       new URLSearchParams(Object.entries(body.attribution ?? {})),
     );
@@ -77,7 +88,7 @@ export async function POST(request: Request) {
       process.env.FLUTTERWAVE_CALLBACK_URL ??
       'https://micttechnologysolutions.com/api/flutterwave/callback';
 
-    const amountNaira = marketingConfig.priceMinor / 100;
+    const amountNaira = selectedPackage.priceMinor / 100;
 
     if (!Number.isSafeInteger(amountNaira) || amountNaira <= 0) {
       throw new Error('Invalid configured course price');
@@ -93,6 +104,8 @@ export async function POST(request: Request) {
       metadata: {
         course: marketingConfig.courseSlug,
         cohort: marketingConfig.cohortSlug,
+        package_id: selectedPackage.id,
+        package_name: selectedPackage.name,
         full_name: body.fullName,
         phone: body.phone,
         ...attribution,
@@ -102,8 +115,10 @@ export async function POST(request: Request) {
     await insertCheckout({
       leadId,
       reference,
-      amountMinor: marketingConfig.priceMinor,
+      amountMinor: selectedPackage.priceMinor,
       currency: marketingConfig.currency,
+      packageId: selectedPackage.id,
+      packageName: selectedPackage.name,
       authorizationUrl: tx.link,
       gateway: 'flutterwave',
       attribution,
