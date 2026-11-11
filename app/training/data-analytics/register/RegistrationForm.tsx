@@ -471,14 +471,14 @@ export default function DataAnalyticsRegistrationPage() {
                         type="button"
                         aria-pressed={isSelected}
                         onClick={() => setSelectedPackageId(pkg.id)}
-                        className={`relative w-full rounded-2xl border p-5 text-left transition ${pkg.recommended ? "border-green-500 bg-green-50 shadow-md" : "border-slate-200 bg-white"} ${isSelected ? "ring-2 ring-green-500" : ""}`}
+                        className={`relative w-full rounded-2xl border p-5 text-left transition ${isSelected ? "border-green-500 bg-green-50 shadow-md ring-2 ring-green-500/30" : pkg.recommended ? "border-amber-300 bg-amber-50/50" : "border-slate-200 bg-white"}`}
                       >
                         <div className="flex flex-wrap items-center justify-between gap-3">
                           <span className="font-bold text-slate-900">{pkg.name}</span>
                           <span className="text-xl font-extrabold text-slate-950">{pkg.priceLabel}</span>
                         </div>
                         {pkg.recommended && (
-                          <span className="mt-2 inline-block rounded-full bg-green-600 px-3 py-1 text-xs font-bold text-white">
+                          <span className="mt-2 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
                             Recommended
                           </span>
                         )}

@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { cohortCampaign } from "@/lib/cohortCampaign";
+import { trainingPackages } from "@/lib/marketing/packages";
 
 const DISMISSAL_KEY = "mict-cohort-popup-dismissed";
 
@@ -167,31 +168,41 @@ export default function CohortPopup() {
             </div>
           </div>
 
-          {/* Founding cohort fee */}
-          <div className="mt-6 rounded-2xl border border-green-200 bg-green-50 p-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-green-700">
-                  Founding Cohort
-                </p>
-
-                <div className="mt-1 flex items-center gap-2">
-                  <p className="text-2xl font-bold text-slate-950">
-                    {cohortCampaign.foundingFee}
+          {/* Training packages */}
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {Object.values(trainingPackages).map((pkg) => (
+              <div
+                key={pkg.id}
+                className={`rounded-2xl border p-4 ${
+                  pkg.recommended
+                    ? "border-amber-300 bg-amber-50/70"
+                    : "border-slate-200 bg-white"
+                }`}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-sm font-bold text-slate-900">
+                    {pkg.name}
                   </p>
-
-                  <span className="text-sm text-slate-500">
-                    registration fee
-                  </span>
+                  {pkg.recommended && (
+                    <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-800">
+                      Recommended
+                    </span>
+                  )}
                 </div>
+                <p className="mt-3 text-2xl font-extrabold text-slate-950">
+                  {pkg.priceLabel}
+                </p>
+                <p className="mt-2 text-xs leading-5 text-slate-600">
+                  {pkg.description}
+                </p>
               </div>
+            ))}
+          </div>
 
-              <div className="flex items-center gap-2 text-sm font-semibold text-green-700">
-                <Clock3 size={17} />
-                {daysRemaining}{" "}
-                {daysRemaining === 1 ? "day" : "days"} left
-              </div>
-            </div>
+          <div className="mt-3 flex items-center justify-end gap-2 text-sm font-semibold text-green-700">
+            <Clock3 size={17} />
+            {daysRemaining}{" "}
+            {daysRemaining === 1 ? "day" : "days"} left
           </div>
 
           {/* Benefits */}
